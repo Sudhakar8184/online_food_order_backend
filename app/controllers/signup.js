@@ -36,16 +36,8 @@ module.exports = {
             token: jwtService.createToken(user[0]),
             _id: user[0]._id
           });
-        else return res.json({ success: false });
-      } else {
-        if (data.email == "admin@gmail.com" && data.password == "admin@786") {
-            return res.json({
-                success: "success",
-                role:'admin',
-              });
-        } else {
-          return res.json({ success: false });
-        }
+        else 
+        return res.json({ success: false });
       }
     } catch (error) {
       console.log("error", error);
@@ -76,6 +68,21 @@ module.exports = {
     const user = await Pharma.findOneAndUpdate({ _id: mongoose.Types.ObjectId(req.body.pharma_id)},{$pull :{ user : req.body.user_id}});
     if(user){
       const main = await Pharma.find({user:{$in : mongoose.Types.ObjectId(data.user_id)}}) 
+        return res.json({success:true,data:main})
+    } else{
+        return res.json({success:false})
+    }
+  },
+  deleteFromVendorList: async(req, res)=>{
+    let data = JSON.parse(JSON.stringify(req.body))
+    const user = await Pharma.remove({ _id: mongoose.Types.ObjectId(req.body.pharma_id)});
+    if(user){
+      let main
+      if(req.body.user_id)
+       main = await Pharma.deleteOne({vender : mongoose.Types.ObjectId(data.user_id)}) 
+      else
+       main = await Pharma.find({}) 
+       console.log(main)
         return res.json({success:true,data:main})
     } else{
         return res.json({success:false})

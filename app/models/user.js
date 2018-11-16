@@ -19,9 +19,14 @@ var userSchema = new Schema({
         trim:true,
         default:''
     },
+    address:{
+        type:String,
+        trim:true,
+        default:''
+    },
     role:{
         type:String,
-        enum:['user','vendor'],
+        enum:['user','vendor','admin'],
         default:'user'
     },
     password:{
