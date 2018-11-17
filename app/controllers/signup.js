@@ -38,6 +38,8 @@ module.exports = {
           });
         else 
         return res.json({ success: false });
+      }else{
+        return res.json({ success: false });
       }
     } catch (error) {
       console.log("error", error);
@@ -56,7 +58,17 @@ module.exports = {
   myLists: async(req, res)=>{
     let data = JSON.parse(JSON.stringify(req.query))
     console.log(data)
-    const user = await Pharma.find({user:{$in : mongoose.Types.ObjectId(data.id)}})
+    const user = await Pharma.find({user:{$in : mongoose.Types.ObjectId(data.id)}}).populate('vendor')
+    if(user){
+        return res.json({success:true,data:user})
+    } else{
+        return res.json({success:false})
+    }
+  },
+  getUserDetail: async(req, res)=>{
+    let data = JSON.parse(JSON.stringify(req.query))
+    console.log(data)
+    const user = await User.find({_id: mongoose.Types.ObjectId(data.id)})
     if(user){
         return res.json({success:true,data:user})
     } else{
@@ -67,7 +79,7 @@ module.exports = {
     let data = JSON.parse(JSON.stringify(req.body))
     const user = await Pharma.findOneAndUpdate({ _id: mongoose.Types.ObjectId(req.body.pharma_id)},{$pull :{ user : req.body.user_id}});
     if(user){
-      const main = await Pharma.find({user:{$in : mongoose.Types.ObjectId(data.user_id)}}) 
+      let main = await Pharma.find({user:{$in : mongoose.Types.ObjectId(data.user_id)}}) 
         return res.json({success:true,data:main})
     } else{
         return res.json({success:false})

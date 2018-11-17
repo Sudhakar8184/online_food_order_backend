@@ -23,7 +23,7 @@ module.exports = {
 getpostAll: async (req,res) => {
   try {
     
-   let pharmadata = await Pharma.find({});
+   let pharmadata = await Pharma.find({}).populate('vendor');
    if (pharmadata) 
    return res.json({ success: true, data: pharmadata });
    else

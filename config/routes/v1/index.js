@@ -10,6 +10,7 @@ const admin = require('../../../app/controllers/admin')
  router.get('/getposts',admin.getposts)
  router.post('/addtoList',user.addtoLists)
  router.get('/myList',user.myLists)
+ router.get('/getUserDetails',user.getUserDetail)
  router.post('/deletefromList',user.deleteFromLists)
  router.post('/deleteFromVendorlist',user.deleteFromVendorList)
 module.exports = router
