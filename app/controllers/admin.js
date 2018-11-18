@@ -58,5 +58,18 @@ getposts: async (req,res) => {
   catch (error) {
     console.log("error", error);
   }
+},
+getPostCatagory: async (req,res) => {
+  try {
+    console.log(req.query)
+   let pharmadata = await Pharma.find({catagory: req.query.catagory});
+   if (pharmadata) 
+   return res.json({ success: true, data: pharmadata });
+   else
+   return res.json({ success: false });
+  } 
+  catch (error) {
+    console.log("error", error);
+  }
 }
 };

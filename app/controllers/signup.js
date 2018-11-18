@@ -87,14 +87,13 @@ module.exports = {
   },
   deleteFromVendorList: async(req, res)=>{
     let data = JSON.parse(JSON.stringify(req.body))
-    const user = await Pharma.remove({ _id: mongoose.Types.ObjectId(req.body.pharma_id)});
+    const user = await Pharma.deleteOne({ _id: mongoose.Types.ObjectId(data.pharma_id)});
     if(user){
       let main
       if(req.body.user_id)
-       main = await Pharma.deleteOne({vender : mongoose.Types.ObjectId(data.user_id)}) 
+       main = await Pharma.find({vendor : mongoose.Types.ObjectId(data.user_id)}) 
       else
        main = await Pharma.find({}) 
-       console.log(main)
         return res.json({success:true,data:main})
     } else{
         return res.json({success:false})

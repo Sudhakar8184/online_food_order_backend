@@ -21,6 +21,16 @@ var pharmaSchema = new Schema({
         trim:true,
         default:''
     },
+    catagory:{
+        type:String,
+        trim:true,
+        default:''
+    },
+    location:{
+        type:String,
+        trim:true,
+        default:''
+    },
     user:[{
         type: Schema.Types.ObjectId,
         ref: 'Usermodel'
