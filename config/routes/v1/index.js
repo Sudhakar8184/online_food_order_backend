@@ -14,4 +14,5 @@ const admin = require('../../../app/controllers/admin')
  router.get('/getUserDetails',user.getUserDetail)
  router.post('/deletefromList',user.deleteFromLists)
  router.post('/deleteFromVendorlist',user.deleteFromVendorList)
+ router.post('/deleteFromAdminList',user.deleteFromAdminLists)
 module.exports = router

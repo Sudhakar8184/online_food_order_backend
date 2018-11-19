@@ -98,5 +98,16 @@ module.exports = {
     } else{
         return res.json({success:false})
     }
+  },
+  deleteFromAdminLists: async(req, res)=>{
+    let data = JSON.parse(JSON.stringify(req.body))
+    const user = await Pharma.deleteOne({ _id: mongoose.Types.ObjectId(data.pharma_id)});
+    if(user){
+      let main
+       main = await Pharma.find({}) 
+        return res.json({success:true,data:main})
+    } else{
+        return res.json({success:false})
+    }
   }
 };
