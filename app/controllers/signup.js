@@ -10,9 +10,7 @@ module.exports = {
       let useremail = await User.find({ email: data.email }).count();
       if (!useremail) {
         var user = new User(data);
-        console.log(">>>???", user);
         user.password = bcrypt.hashSync(data.password, 10);
-        console.log("<<<<<???", user);
         let userdata = await user.save();
         if (userdata) return res.json({ success: true });
       } else {

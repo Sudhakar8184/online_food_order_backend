@@ -1,5 +1,3 @@
-let express = require('express');
-const router = require('express').Router();
 require('./../../app/models/user')
 require('./../../app/models/pharma')
 module.exports = function(app){
